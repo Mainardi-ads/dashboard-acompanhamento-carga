@@ -8,7 +8,7 @@ from streamlit_autorefresh import st_autorefresh
 st.set_page_config(page_title="Dashboard de Produtividade", layout="wide")
 
 st_autorefresh(
-    interval=10000,
+    interval=900000,
     key="prod_refresh"
 )
 
@@ -53,7 +53,7 @@ h3 {
 </style>
 """, unsafe_allow_html=True)
 
-@st.cache_data(ttl=60)
+@st.cache_data(ttl=900)
 def carregar_dados_oniz():
     
     client = OnizClient(
@@ -177,7 +177,7 @@ def exibir_analise(df):
             else 0
         )
     
-    col1, col2, col3, col4 = st.columns([1.2,1,1,1], gap="xxsmall", vertical_alignment="center")
+    col1, col2, col3, col4 = st.columns([1,1,1,1], gap="xxsmall", vertical_alignment="center")
     
     st.markdown("""
         <style>
@@ -195,7 +195,7 @@ def exibir_analise(df):
             }
 
             .card-valor {
-                font-size: 18px;
+                font-size: 15px;
                 font-weight: 600;
                 color: white;
                 line-height: 1;
@@ -214,7 +214,7 @@ def exibir_analise(df):
         </style>
         """, unsafe_allow_html=True)
     
-    def criar_card(legenda, valor, fundo="#4C1D95;", cor_valor="#5ce488", cor_legenda="#cab0f7", borda_baixo="#cab0f7", borda_esquerda="#cab0f7"): 
+    def criar_card(legenda, valor, fundo="#323232;", cor_valor="white", cor_legenda="#b2b2b2", borda_baixo="#666666", borda_esquerda="#666666"): 
         st.markdown(f"""
             <div class="card" style="background-color:{fundo}; border-bottom: 5px solid {borda_baixo}; border-left: 3px solid {borda_esquerda};"> 
                 <div class="card-valor" style="color:{cor_valor}";">{valor}</div>
@@ -227,7 +227,7 @@ def exibir_analise(df):
             
             st.markdown("""
                 <div style="
-                    background: linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%);
+                    background: linear-gradient(135deg, #946b2d 0%, #5d5d5d 100%);                    
                     color:white;
                     padding:8px 12px;
                     border-radius:8px;
