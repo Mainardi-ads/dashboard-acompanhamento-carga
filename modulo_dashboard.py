@@ -32,6 +32,7 @@ footer {
 
 /* remove espaços do topo */
 .main .block-container {
+    max-width: 90% !important;
     padding-top: 0rem;
     padding-bottom: 0rem;
 }
