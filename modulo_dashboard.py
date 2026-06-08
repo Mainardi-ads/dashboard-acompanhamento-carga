@@ -4,6 +4,7 @@ from pathlib import Path
 from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 from oniz_client import OnizClient
 from streamlit_autorefresh import st_autorefresh
+import base64
 
 st.set_page_config(page_title="Dashboard de Produtividade", layout="wide")
 
@@ -100,11 +101,11 @@ def transformar_dados(df):
     return df
     
 def aplicar_filtros(df):
-    
-   col1, col2, col3, col4 = st.columns(4)
-   
-   with col1:
-        data_selecionada = st.date_input("Selecione uma data de saída: ")
+        
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        data_selecionada = st.date_input("Selecione um período: ")
         df_filtrado = df[df["Saida datetime"].dt.date == data_selecionada]
         return df_filtrado
 
@@ -732,20 +733,27 @@ def exibir_analise(df):
 def main():
     
     df = carregar_dados_oniz()
-    st.write("Última atualização:", pd.Timestamp.now())
     
-    st.markdown(
-        """
+    st.image("braveolog.png", width=90)
+
+    st.markdown("""
         <h2 style="
             text-align:center;
-            margin-top:0px;
-            margin-bottom:15px;
+            margin-top:-80px;
+            margin-bottom:50px;
+            background: linear-gradient(
+                90deg,
+                #086928,
+                #58D281,
+                #83E6A4
+            );
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            font-weight:800;
         ">
             Acompanhamento de produção de cargas
         </h2>
-        """,
-        unsafe_allow_html=True
-    )    
+    """, unsafe_allow_html=True)
     
     df = transformar_dados(df)
     df = aplicar_filtros(df)
