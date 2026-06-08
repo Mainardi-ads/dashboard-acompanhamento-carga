@@ -50,10 +50,6 @@ h3 {
     max-width: 100%;
 }
 
-.stApp {
-    background-color: #f5f7fa;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -218,7 +214,7 @@ def exibir_analise(df):
         </style>
         """, unsafe_allow_html=True)
     
-    def criar_card(legenda, valor, fundo="#bcbcbc;", cor_valor="#111827", cor_legenda="#111827", borda_baixo="#5b5b5b", borda_esquerda="#5b5b5b"): 
+    def criar_card(legenda, valor, fundo="#4C1D95;", cor_valor="#5ce488", cor_legenda="#cab0f7", borda_baixo="#cab0f7", borda_esquerda="#cab0f7"): 
         st.markdown(f"""
             <div class="card" style="background-color:{fundo}; border-bottom: 5px solid {borda_baixo}; border-left: 3px solid {borda_esquerda};"> 
                 <div class="card-valor" style="color:{cor_valor}";">{valor}</div>
@@ -229,7 +225,19 @@ def exibir_analise(df):
     with col1:
         with st.container(border=True):
             
-            st.markdown("<h5 style='color:#111827; margin-bottom:10px;'>Resumo Valores</h5>", unsafe_allow_html=True)
+            st.markdown("""
+                <div style="
+                    background: linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%);
+                    color:white;
+                    padding:8px 12px;
+                    border-radius:8px;
+                    font-weight:600;
+                    text-align:center;
+                    margin-bottom:20px;
+                ">
+                    Resumo Valores
+                </div>
+                """, unsafe_allow_html=True)
             
             col5, col6, col7 = st.columns(3, gap="small")
             
@@ -258,33 +266,51 @@ def exibir_analise(df):
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#3fc79a",
-                        borda_baixo="#0b815a",
-                        borda_esquerda="#0b815a"
+                        fundo="#14532D",
+                        cor_valor="#5ce488",
+                        cor_legenda="#A7F3D0",
+                        borda_baixo="#6EE7B7",
+                        borda_esquerda="#6EE7B7"
                     )
             elif perc_financeiro_separado>=50:
                 criar_card(legenda="% Separado", valor=f"{perc_financeiro_separado:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f7b13b",
-                        borda_baixo="#c47e08",
-                        borda_esquerda="#c47e08"
+                        fundo="#854D0E",
+                        cor_valor="#FDE68A",
+                        cor_legenda="#FEF3C7",
+                        borda_baixo="#FCD34D",
+                        borda_esquerda="#FCD34D"
                     )
             else:
                 criar_card(legenda="% Separado", valor=f"{perc_financeiro_separado:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f05656",
-                        borda_baixo="#bf3636",
-                        borda_esquerda="#bf3636"
+                        fundo="#7F1D1D",
+                        cor_valor="#FCA5A5",
+                        cor_legenda="#FECACA",
+                        borda_baixo="#F87171",
+                        borda_esquerda="#F87171"
                     )
     
     # Resumo Box    
     with col2:
         with st.container(border=True):
-            st.markdown("<h5 style='color:#111827; margin-bottom:10px'>Resumo Box</h5>", unsafe_allow_html=True)
+            st.markdown("""
+                <div style="
+                    background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%);
+                    color:white;
+                    padding:8px 12px;
+                    border-radius:8px;
+                    font-weight:600;
+                    text-align:center;
+                    margin-bottom:20px;
+                ">
+                    Resumo Box
+                </div>
+                """, unsafe_allow_html=True)
             
             col5, col6, col7 = st.columns(3, gap="small")
             
@@ -302,33 +328,51 @@ def exibir_analise(df):
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#3fc79a",
-                        borda_baixo="#0b815a",
-                        borda_esquerda="#0b815a"
+                        fundo="#14532D",
+                        cor_valor="#5ce488",
+                        cor_legenda="#A7F3D0",
+                        borda_baixo="#6EE7B7",
+                        borda_esquerda="#6EE7B7"
                     )
-            elif perc_box >= 50:
+            elif perc_box>=50:
                 criar_card(legenda="% Separado", valor=f"{perc_box:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f7b13b",
-                        borda_baixo="#c47e08",
-                        borda_esquerda="#c47e08"
+                        fundo="#854D0E",
+                        cor_valor="#FDE68A",
+                        cor_legenda="#FEF3C7",
+                        borda_baixo="#FCD34D",
+                        borda_esquerda="#FCD34D"
                     )
             else:
                 criar_card(legenda="% Separado", valor=f"{perc_box:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f05656",
-                        borda_baixo="#bf3636",
-                        borda_esquerda="#bf3636"
+                        fundo="#7F1D1D",
+                        cor_valor="#FCA5A5",
+                        cor_legenda="#FECACA",
+                        borda_baixo="#F87171",
+                        borda_esquerda="#F87171"
                     )
         
     # Resumo Ilha         
     with col3:
         with st.container(border=True):
-            st.markdown("<h5 style='color:#111827; margin-bottom:10px;'>Resumo Ilha</h5>", unsafe_allow_html=True)
+            st.markdown("""
+                <div style="
+                    background: linear-gradient(135deg, #0066B3 0%, #0F766E 100%);
+                    color: white;
+                    padding:8px 12px;
+                    border-radius:8px;
+                    font-weight:600;
+                    text-align:center;
+                    margin-bottom:20px;
+                ">
+                    Resumo Box
+                </div>
+                """, unsafe_allow_html=True)
             
             col5, col6, col7 = st.columns(3, gap="small")
             
@@ -346,33 +390,51 @@ def exibir_analise(df):
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#3fc79a",
-                        borda_baixo="#0b815a",
-                        borda_esquerda="#0b815a"
+                        fundo="#14532D",
+                        cor_valor="#5ce488",
+                        cor_legenda="#A7F3D0",
+                        borda_baixo="#6EE7B7",
+                        borda_esquerda="#6EE7B7"
                     )
             elif perc_ilha>=50:
                 criar_card(legenda="% Separado", valor=f"{perc_ilha:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f7b13b",
-                        borda_baixo="#c47e08",
-                        borda_esquerda="#c47e08"
-                )
+                        fundo="#854D0E",
+                        cor_valor="#FDE68A",
+                        cor_legenda="#FEF3C7",
+                        borda_baixo="#FCD34D",
+                        borda_esquerda="#FCD34D"
+                    )
             else:
                 criar_card(legenda="% Separado", valor=f"{perc_ilha:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f05656",
-                        borda_baixo="#bf3636",
-                        borda_esquerda="#bf3636"
+                        fundo="#7F1D1D",
+                        cor_valor="#FCA5A5",
+                        cor_legenda="#FECACA",
+                        borda_baixo="#F87171",
+                        borda_esquerda="#F87171"
                     )
         
     # Resumo cargas    
     with col4:
         with st.container(border=True):
-            st.markdown("<h5 style='color:#111827; margin-bottom:10px;'>Resumo Cargas</h5>", unsafe_allow_html=True)
+            st.markdown("""
+                <div style="
+                    background: linear-gradient(135deg, #374151 0%, #1E3A8A 100%);
+                    color: white;
+                    padding:8px 12px;
+                    border-radius:8px;
+                    font-weight:600;
+                    text-align:center;
+                    margin-bottom:20px;
+                ">
+                    Resumo Carga
+                </div>
+                """, unsafe_allow_html=True)
             
             col5, col6, col7 = st.columns(3, gap="small")
             
@@ -390,28 +452,34 @@ def exibir_analise(df):
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#3fc79a",
-                        borda_baixo="#0b815a",
-                        borda_esquerda="#0b815a"
+                        fundo="#14532D",
+                        cor_valor="#5ce488",
+                        cor_legenda="#A7F3D0",
+                        borda_baixo="#6EE7B7",
+                        borda_esquerda="#6EE7B7"
                     )
             elif perc_cargas_finalizadas>=50:
                 criar_card(legenda="% Separado", valor=f"{perc_cargas_finalizadas:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f7b13b",
-                        borda_baixo="#c47e08",
-                        borda_esquerda="#c47e08"
+                        fundo="#854D0E",
+                        cor_valor="#FDE68A",
+                        cor_legenda="#FEF3C7",
+                        borda_baixo="#FCD34D",
+                        borda_esquerda="#FCD34D"
                     )
             else:
                 criar_card(legenda="% Separado", valor=f"{perc_cargas_finalizadas:,.2f}%"
                         .replace(",", "X")
                         .replace(".", ",")
                         .replace("X", "."),
-                        fundo="#f05656",
-                        borda_baixo="#bf3636",
-                        borda_esquerda="#bf3636"
-                    ) 
+                        fundo="#7F1D1D",
+                        cor_valor="#FCA5A5",
+                        cor_legenda="#FECACA",
+                        borda_baixo="#F87171",
+                        borda_esquerda="#F87171"
+                    )
     
     # Criação de progress bar
     cell_renderer = JsCode("""
@@ -420,7 +488,7 @@ def exibir_analise(df):
 
             let value = Number(params.value) || 0;
 
-            let color = '#f59e0b';
+            let color = '#f05656';
 
             if (value >= 100)
                 color = '#10b981';
@@ -543,6 +611,11 @@ def exibir_analise(df):
                 sortable=False,
                 suppressMenu=True
             )
+            
+        gb_box.configure_column(
+            "Itens Gaiola",
+            header_name="Itens Box"
+        )
         
         gb_box.configure_column(
             "% Separação Box",
@@ -584,6 +657,11 @@ def exibir_analise(df):
             filter=False,
             sortable=False,
             suppressMenu=True
+        )
+            
+        gb_ilha.configure_column(
+            "Itens Flow Rack",
+            header_name="Itens Ilha"
         )
         
         gb_ilha.configure_column(
