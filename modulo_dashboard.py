@@ -309,7 +309,7 @@ def exibir_analise(df):
                     text-align:center;
                     margin-bottom:20px;
                 ">
-                    Resumo Ilha
+                    Resumo Box
                 </div>
                 """, unsafe_allow_html=True)
             
@@ -371,7 +371,7 @@ def exibir_analise(df):
                     text-align:center;
                     margin-bottom:20px;
                 ">
-                    Resumo Box
+                    Resumo Ilha
                 </div>
                 """, unsafe_allow_html=True)
             
