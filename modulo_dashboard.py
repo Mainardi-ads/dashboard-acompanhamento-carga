@@ -104,10 +104,12 @@ def aplicar_filtros(df):
         
     col1, col2, col3, col4 = st.columns(4)
 
+    df_filtrado = df.copy()
+    
     with col1:
-        data_selecionada = st.date_input("Selecione um período: ")
-        df_filtrado = df[df["Saida datetime"].dt.date == data_selecionada]
-        return df_filtrado
+        data_inicio, data_fim = st.date_input("Informe a data de saída:", value=(df_filtrado["Saida datetime"].dt.date.min(), df_filtrado["Saida datetime"].dt.date.max()))
+        df_filtrado = df_filtrado[(df_filtrado["Saida datetime"].dt.date >= data_inicio) & (df_filtrado["Saida datetime"].dt.date <= data_fim)]
+    return df_filtrado
 
 def exibir_analise(df):
         
