@@ -86,7 +86,7 @@ class OnizClient:
 
 if __name__ == "__main__":
     
-    client = OnizClient(usuario="311048", senha="Kthl22010804*")
+    client = OnizClient(usuario="311048", senha="Oniz2026*")
 
     client.login()
     
