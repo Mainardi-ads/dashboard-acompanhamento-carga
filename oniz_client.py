@@ -75,10 +75,11 @@ class OnizClient:
 
         for tabela in dfs:
 
+            if isinstance(tabela.columns, pd.MultiIndex):
+                tabela.columns = tabela.columns.get_level_values(0)
+
             if "Carga" in tabela.columns:
-
                 df = tabela.copy()
-
                 break
 
         if df is None:
@@ -90,13 +91,17 @@ class OnizClient:
 
         # Limpeza
         df = df.dropna(how="all")
+        
+        if df.empty:
+            return df
 
         df = df.reset_index(drop=True)
 
-        df = df.loc[
-            :,
-            ~df.columns.astype(str).str.contains("^Unnamed")
-        ]
+        # Garante que os nomes das colunas sejam strings
+        df.columns = df.columns.map(str)
+
+        # Remove colunas Unnamed
+        df = df.loc[:, ~df.columns.str.contains("^Unnamed", na=False)]
 
         # Remove linhas sem carga
         df = df[
@@ -116,21 +121,37 @@ class OnizClient:
                 "Coluna 'Itens Gaiola' não encontrada."
             )
 
-        df[["Box separado", "Box Total"]] = (
+        if df.empty:
 
-            df["Itens Gaiola"]
+            df["Box separado"] = 0
+            df["Box Total"] = 0
 
-            .astype(str)
+        else:
 
-            .str.split("/", expand=True)
-
-            .apply(
-                lambda x: x.str.strip()
+            split = (
+                df["Itens Gaiola"]
+                .astype(str)
+                .str.split("/", expand=True)
             )
 
-            .astype(int)
+            if split.shape[1] >= 2:
 
-        )
+                df[["Box separado", "Box Total"]] = (
+
+                    split.iloc[:, :2]
+
+                    .apply(lambda x: x.str.strip())
+
+                    .replace("", "0")
+
+                    .astype(int)
+
+                )
+
+            else:
+
+                df["Box separado"] = 0
+                df["Box Total"] = 0
 
         df["% Separação Box"] = np.where(
 
@@ -150,21 +171,37 @@ class OnizClient:
                 "Coluna 'Itens Flow Rack' não encontrada."
             )
 
-        df[["Ilha separado", "Ilha Total"]] = (
+        if df.empty:
 
-            df["Itens Flow Rack"]
+            df["Ilha separado"] = 0
+            df["Ilha Total"] = 0
 
-            .astype(str)
+        else:
 
-            .str.split("/", expand=True)
-
-            .apply(
-                lambda x: x.str.strip()
+            split = (
+                df["Itens Flow Rack"]
+                .astype(str)
+                .str.split("/", expand=True)
             )
 
-            .astype(int)
+            if split.shape[1] >= 2:
 
-        )
+                df[["Ilha separado", "Ilha Total"]] = (
+
+                    split.iloc[:, :2]
+
+                    .apply(lambda x: x.str.strip())
+
+                    .replace("", "0")
+
+                    .astype(int)
+
+                )
+
+            else:
+
+                df["Ilha separado"] = 0
+                df["Ilha Total"] = 0
 
         df["% Separação Ilha"] = np.where(
 
@@ -177,16 +214,3 @@ class OnizClient:
         )
 
         return df
-    
-if __name__ == "__main__":
-    
-    client = OnizClient(usuario="311048", senha="Oni2026*")
-
-    client.login()
-    
-    df = client.extrair_gaiolas()
-    
-    df.to_excel(
-        r"C:\Users\marcio.junior\OneDrive - Oniz Distribuidora\Arquivos de Patrick Schaffer - Logística - CD SUL - CCH\2025\05 - Armazém\08 - Produtividade\Acompanhamento producao\producao_gaiolas.xlsx",
-        index=False
-    )

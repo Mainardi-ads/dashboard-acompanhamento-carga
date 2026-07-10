@@ -736,6 +736,10 @@ def main():
     
     df = carregar_dados_oniz()
     
+    if df.empty:
+        st.warning("📦 Não existem cargas em separação no momento.")
+        st.stop()
+    
     st.image("braveolog.png", width=90)
 
     st.markdown("""
