@@ -59,7 +59,7 @@ def carregar_dados_oniz():
     
     client = OnizClient(
         usuario="311048",
-        senha="Cdsul123*"
+        senha="Mainardi2002*"
     )
     
     client.login()
